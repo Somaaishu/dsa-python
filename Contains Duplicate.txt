@@ -1,0 +1,33 @@
+class Solution:
+    def containsDuplicate(self, nums):
+
+        seen = set()   # to store unique elements
+
+        for num in nums:
+            if num in seen:
+                return True   # duplicate found
+            seen.add(num)
+
+        return False
+
+
+# Driver Code
+if __name__ == "__main__":
+    nums = [1, 2, 3, 1]
+
+    obj = Solution()
+    result = obj.containsDuplicate(nums)
+
+    print("Contains Duplicate:", result)
+
+
+I iterate through the array and store elements in a set.
+If an element already exists in the set, I return true.
+If the loop completes, there are no duplicates.
+This solution runs in O(n) time.
+
+Time: O(n) — single traversal, set lookup O(1)
+
+Space: O(n) — set stores unique elements
+
+“A set helps detect duplicates efficiently in one pass.”

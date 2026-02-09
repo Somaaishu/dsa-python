@@ -1,0 +1,40 @@
+class Solution:
+    def twoSum(self, nums, target):
+
+        num_map = {}   # dictionary to store number:index
+
+        for i in range(len(nums)):
+
+            complement = target - nums[i]
+
+            # check if complement exists
+            if complement in num_map:
+                return [num_map[complement], i]
+
+            # store current number
+            num_map[nums[i]] = i
+
+
+# Driver Code
+if __name__ == "__main__":
+    nums = [2, 7, 11, 15]
+    target = 9
+
+    obj = Solution()
+    result = obj.twoSum(nums, target)
+
+    print("Indices:", result)
+
+
+
+I use a hashmap to store elements and their indices.
+For each number, I compute the complement and check if it exists in the hashmap.
+If found, I return the indices.
+This reduces time complexity to O(n).
+
+
+Time: O(n) — one pass, hashmap lookup is O(1)
+
+Space: O(n) — hashmap stores elements
+
+“I use a hashmap for constant-time lookup, reducing time from O(n²) to O(n).”
