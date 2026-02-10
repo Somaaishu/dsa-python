@@ -1,0 +1,62 @@
+🔥 Logic
+👉 Multiply numbers on the LEFT and RIGHT of each element.
+
+✅ First loop → store LEFT product
+✅ Second loop → multiply RIGHT product
+
+⭐ Formula:
+
+Answer[i] = Left × Right
+
+⏱️ Complexity
+
+✅ Time Complexity: O(n)
+→ Traverse array twice.
+
+✅ Space Complexity: O(1)
+→ Only left and right variables used.
+
+🧠 Memory Trick
+
+👉 “LEFT × RIGHT = ANSWER”
+👉 Think Prefix + Suffix
+
+class Solution:
+
+    def productExceptSelf(self, nums):
+
+        n = len(nums)
+        answer = [1] * n
+
+        # LEFT pass
+        left = 1
+        for i in range(n):
+            answer[i] = left
+            left *= nums[i]
+
+        # RIGHT pass
+        right = 1
+        for i in range(n-1, -1, -1):
+            answer[i] *= right
+            right *= nums[i]
+
+        return answer
+
+
+def main():
+
+    nums = [1,2,3,4]
+
+    obj = Solution()
+    result = obj.productExceptSelf(nums)
+
+    print(result)
+
+
+if __name__ == "__main__":
+    main()
+
+I compute prefix (left) products in one pass and suffix (right) products in another pass. Multiplying them gives the result without division.
+
+👉 Time Complexity: O(n)
+👉 Space Complexity: O(1)
