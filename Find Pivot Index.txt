@@ -1,0 +1,19 @@
+class Solution(object): 
+def pivotIndex(self, nums): 
+total = sum(nums) left_sum = 0 
+for i, num in enumerate(nums): 
+if left_sum == total - left_sum - num: 
+return i 
+left_sum += num return -1
+
+Complexity 
+
+✅ Time: O(n)
+👉 Only one loop.
+
+✅ Space: O(1)
+👉 No extra memory.
+
+🔥 Interview Explanation (Use This!)
+
+👉 “First I compute the total sum. Then I iterate once while maintaining a left sum. For each element, I derive the right sum using total - left - current. If both match, I return the index.”
