@@ -1,0 +1,26 @@
+class Solution(object):
+    def subarraySum(self, nums, k):
+        count = 0
+        cumulative_sum = 0
+        # Map stores: {prefix_sum : frequency}
+        prefix_sums = {0: 1} 
+        
+        for num in nums:
+            cumulative_sum += num
+            
+            # Logic: If (curr_sum - k) was seen before, 
+            # then the gap between that point and now is exactly k.
+            target = cumulative_sum - k
+            
+            if target in prefix_sums:
+                count += prefix_sums[target]
+            
+            # Save current sum in map for future reference
+            prefix_sums[cumulative_sum] = prefix_sums.get(cumulative_sum, 0) + 1
+            
+        return count
+
+Time Complexity O(n) We iterate through the list nums exactly once. Each Hash Map operation (lookup and insert) takes $O(1)$ on average.
+Space Complexity O(n) In the worst case (e.g., all positive numbers), every cumulative_sum will be unique, requiring us to store $n$ entries in the Hash Map.
+
+"A nested loop approach would be $O(n^2)$. By using a Hash Map, I'm trading a bit of space to gain a massive amount of speed, bringing the complexity down to linear time."

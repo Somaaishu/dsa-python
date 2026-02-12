@@ -1,0 +1,26 @@
+class Solution(object):
+    def maxArea(self, height):
+        left, right = 0, len(height) - 1
+        max_water = 0
+        
+        while left < right:
+            # Calculate current area: width * height of the shorter wall
+            width = right - left
+            current_height = min(height[left], height[right])
+            current_area = width * current_height
+            
+            max_water = max(max_water, current_area)
+            
+            # Logic: Move the pointer pointing to the shorter wall
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+                
+        return max_water
+
+Time O(n) We traverse the array exactly once with the two pointers.
+Space O(1) We only store a few variables (left, right, max_water).
+
+"I used a Two-Pointer approach starting at both ends of the array to maximize the container's width initially. In each step, I calculated the area using the shorter wall as the height bottleneck and updated the global maximum. To find a potentially larger area despite the decreasing width, I greedily moved the pointer pointing to the shorter wall, searching for a taller boundary that could increase the overall volume."
+

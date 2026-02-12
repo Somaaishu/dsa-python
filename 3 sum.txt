@@ -1,0 +1,32 @@
+class Solution(object):
+    def threeSum(self, nums):
+        nums.sort()  # Step 1: Sort the array
+        res = []
+        
+        for i in range(len(nums)):
+            # Skip the same anchor to avoid duplicate triplets
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+            
+            # Step 2: Two-pointer 'pinch'
+            l, r = i + 1, len(nums) - 1
+            while l < r:
+                three_sum = nums[i] + nums[l] + nums[r]
+                
+                if three_sum < 0:
+                    l += 1  # Sum too small, need bigger number
+                elif three_sum > 0:
+                    r -= 1  # Sum too big, need smaller number
+                else:
+                    res.append([nums[i], nums[l], nums[r]])
+                    l += 1
+                    # Skip duplicates for the left pointer
+                    while nums[l] == nums[l-1] and l < r:
+                        l += 1
+        return res
+
+Time Complexity: O(n^2)  The for loop runs $n$ times, and the while loop (the pointers) also traverses the rest of the array ($n$ times).
+Space Complexity: O(1) (if we don't count the output list and internal sorting space). We only use a few variables 
+
+
+"I solve 3Sum in O(n^2) by sorting the array and using an anchor element with two pointers to find triplets. Because it's sorted, I can "pinch" the pointers—moving left to increase the sum or right to decrease it—to efficiently hit zero. To ensure unique results, I simply skip duplicate values for both the anchor and the pointers during the iteration.Time Complexity: O(n^2) Space Complexity: O(1) (ignoring output/sort space)."
